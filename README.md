@@ -14,6 +14,6 @@ This is an alpha version of the software. Feedback and bug reports are welcome. 
 To get started, clone the repository and install the required dependencies:
 
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/Seychik23/obscene_detector.git
+cd obscene_detector
 pip install -r requirements.txt
