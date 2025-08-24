@@ -1,0 +1,14 @@
+[project]
+name = "obscene-detector"
+version = "0.1.0"
+description = "Obscene Detector is a simple tool designed to identify inappropriate language in speech recognized through a microphone. This application is currently in the alpha stage!>"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "cryptography==44.0.0",
+    "dbus-python>=1.4.0",
+    "notify2==0.3.1",
+    "pyaudio>=0.2.14",
+    "pyside6==6.9.1",
+    "speechrecognition==3.14.3",
+]
