@@ -1,0 +1,80 @@
+# Standard Python ignores
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Package management
+pip-wheel-metadata/
+pip-delete-this-directory.txt
+
+# Environments and virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.qtcreator/
+
+
+# Operating system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Application data files
+/bad_words.dat
+/bad_words.txt
+
+# Security-sensitive files
+/Key.txt
+
+# Logs and generated files
+*.log
+logs/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build and deployment files
+*.spec
+instance/
+
+# uv package manager
+.uv/
+uv.lock
+
+# Application-specific files
+/obscene_detector.desktop
+/UI/
+/scripts/

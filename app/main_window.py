@@ -8,14 +8,17 @@ from PySide6.QtGui import QIcon, QAction
 from PySide6.QtCore import Slot
 
 from .worker import RecognitionWorker
-from .word_manager import load_bad_words
+from .word_manager import load_words_for_current_language
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         
+        self.setMinimumSize(400, 200)
+        self.resize(500, 300)
+
         self.setWindowTitle("Obscene detector (alpha version)")
-        self.bad_words = load_bad_words()
+        self.bad_words = load_words_for_current_language()
         
         # GUI
         self.central_widget = QWidget()
