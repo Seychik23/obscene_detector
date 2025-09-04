@@ -2,7 +2,7 @@
 # This software is licensed under the MIT License.
 # See the LICENSE file for more details.
 
-import notify2
+import notify2, os
 from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QPushButton, QLabel, QMenuBar, QMenu, QMessageBox
 from PySide6.QtGui import QIcon, QAction
 from PySide6.QtCore import Slot
@@ -10,12 +10,24 @@ from PySide6.QtCore import Slot
 from .worker import RecognitionWorker
 from .word_manager import load_bad_words
 
+try:
+    from . import __main__
+    _notify_available = __main__._notify_available
+except ImportError:
+    _notify_available = False
+
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         
         self.setWindowTitle("Obscene detector (alpha version)")
         self.bad_words = load_bad_words()
+
+        icon_path = os.path.join('icons', 'icon.png')
+        app_icon = QIcon(icon_path)
+        self.setWindowIcon(app_icon)
         
         # GUI
         self.central_widget = QWidget()
@@ -36,8 +48,7 @@ class MainWindow(QMainWindow):
         # Connect start button
         self.toggle_button.clicked.connect(self.toggle_listening)
 
-        # Notify2 init
-        notify2.init("Obscene Detector")
+        # notify2.init("Obscene Detector")
 
         # Menu bar
         self._create_menus()
