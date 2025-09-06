@@ -3,7 +3,9 @@
 # See the LICENSE file for more details.
 
 import notify2
-from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QPushButton, QLabel, QMenuBar, QMenu, QMessageBox
+import os
+from PySide6.QtWidgets import ( QMainWindow, QVBoxLayout, QWidget, QPushButton, QLabel, QMenuBar, QMenu, QMessageBox)
+
 from PySide6.QtGui import QIcon, QAction
 from PySide6.QtCore import Slot
 
@@ -39,8 +41,13 @@ class MainWindow(QMainWindow):
         # Connect start button
         self.toggle_button.clicked.connect(self.toggle_listening)
 
-        # Notify2 init
-        notify2.init("Obscene Detector")
+        # Check if notify2 is available
+        try:
+            import notify2
+            notify2.init("Obscene Detector")
+        except ImportError:
+            print("Warning: notify2 library not found. Notifications will be disabled.")
+            pass
 
         # Menu bar
         self._create_menus()
@@ -50,6 +57,10 @@ class MainWindow(QMainWindow):
 
 
         settings_menu = menu_bar.addMenu("Настройки")
+
+        set_lang_file_action = QAction("Выбрать файл языка", self)      
+        set_lang_file_action.triggered.connect(self._select_language_file)
+        settings_menu.addAction(set_lang_file_action)
 
         '''
         # For settings qaction
@@ -70,6 +81,12 @@ class MainWindow(QMainWindow):
         about_qt_action = QAction("О Qt", self)
         about_qt_action.triggered.connect(lambda: QMessageBox.aboutQt(self))  
         help_menu.addAction(about_qt_action)
+
+
+    @Slot()
+    def _select_language_file(self):
+     #todo
+        pass
 
     def _show_about_dialog(self):
         QMessageBox.about(self, "О Obscene Detector",
