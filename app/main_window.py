@@ -4,11 +4,15 @@
 
 import notify2, os
 from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QPushButton, QLabel, QMenuBar, QMenu, QMessageBox
+import notify2
+import os
+from PySide6.QtWidgets import ( QMainWindow, QVBoxLayout, QWidget, QPushButton, QLabel, QMenuBar, QMenu, QMessageBox)
+
 from PySide6.QtGui import QIcon, QAction
 from PySide6.QtCore import Slot
 
 from .worker import RecognitionWorker
-from .word_manager import load_bad_words
+from .word_manager import load_words_for_current_language
 
 try:
     from . import __main__
@@ -22,12 +26,16 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         
+        self.setMinimumSize(400, 200)
+        self.resize(500, 300)
+
         self.setWindowTitle("Obscene detector (alpha version)")
         self.bad_words = load_bad_words()
 
         icon_path = os.path.join('icons', 'icon.png')
         app_icon = QIcon(icon_path)
         self.setWindowIcon(app_icon)
+        self.bad_words = load_words_for_current_language()
         
         # GUI
         self.central_widget = QWidget()
@@ -48,7 +56,13 @@ class MainWindow(QMainWindow):
         # Connect start button
         self.toggle_button.clicked.connect(self.toggle_listening)
 
-        # notify2.init("Obscene Detector")
+        # Check if notify2 is available
+        try:
+            import notify2
+            notify2.init("Obscene Detector")
+        except ImportError:
+            print("Warning: notify2 library not found. Notifications will be disabled.")
+            pass
 
         # Menu bar
         self._create_menus()
@@ -58,6 +72,10 @@ class MainWindow(QMainWindow):
 
 
         settings_menu = menu_bar.addMenu("Настройки")
+
+        set_lang_file_action = QAction("Выбрать файл языка", self)      
+        set_lang_file_action.triggered.connect(self._select_language_file)
+        settings_menu.addAction(set_lang_file_action)
 
         '''
         # For settings qaction
@@ -78,6 +96,12 @@ class MainWindow(QMainWindow):
         about_qt_action = QAction("О Qt", self)
         about_qt_action.triggered.connect(lambda: QMessageBox.aboutQt(self))  
         help_menu.addAction(about_qt_action)
+
+
+    @Slot()
+    def _select_language_file(self):
+     #todo
+        pass
 
     def _show_about_dialog(self):
         QMessageBox.about(self, "О Obscene Detector",
