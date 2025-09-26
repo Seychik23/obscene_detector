@@ -10,8 +10,8 @@ from PySide6.QtWidgets import ( QMainWindow, QVBoxLayout, QWidget, QPushButton, 
 from PySide6.QtGui import QIcon, QAction
 from PySide6.QtCore import Slot
 
-from .worker import RecognitionWorker
-from .word_manager import load_words_for_current_language
+from app.worker import RecognitionWorker
+from app.word_manager import load_words_for_current_language
 
 _=gettext.gettext
 
@@ -91,7 +91,7 @@ class MainWindow(QMainWindow):
      #todo
         pass
 
-     def _show_about_dialog(self):
+    def _show_about_dialog(self):
         QMessageBox.about(self, _("About Obscene Detector"),
         f"""<h3>{_("Obscene Detector")}</h3>
         <p>{_("A simple utility to detect swear words in speech recognized via microphone.")}</p>

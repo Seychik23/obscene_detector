@@ -7,7 +7,7 @@ import configparser
 from cryptography.fernet import Fernet
 from pathlib import Path
 
-from .conf_manager import get_language, get_encryption_key, PROJECT_ROOT
+from app.conf_manager import get_language, get_encryption_key, PROJECT_ROOT
 
 
 def _decrypt_words(filepath: str, key: bytes) -> list:
