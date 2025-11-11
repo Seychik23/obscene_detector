@@ -13,3 +13,14 @@ dependencies = [
     "pyside6==6.9.1",
     "speechrecognition==3.14.3",
 ]
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+]
+system = [
+    "portaudio19-dev (Ubuntu/Debian: sudo apt install portaudio19-dev python3-dev)",
+    "portaudio-devel (Fedora/CentOS: sudo dnf install portaudio-devel python3-devel)",
+    "alsa-lib-devel",
+]
